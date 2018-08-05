@@ -17000,7 +17000,7 @@ Abaixo está um exemplo sobre como traçar histogramas com pandas e matplotlib:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong> Resposta </strong>: Em ambos os casos, temos uma distribuiçaõ similar, havendo maior movimentação em dias sem chuva, a curva se assemelha a distribuição Conway–Maxwell–Poisson <a href="https://en.wikipedia.org/wiki/Conway%E2%80%93Maxwell%E2%80%93Poisson_distribution">https://en.wikipedia.org/wiki/Conway%E2%80%93Maxwell%E2%80%93Poisson_distribution</a></p>
+<p><strong> Resposta </strong>: Em ambos os casos, temos uma distribuição de característica similar, sendo essa assimétrica positiva</p>
 
 </div>
 </div>
@@ -17103,7 +17103,7 @@ Abaixo está um exemplo sobre como traçar histogramas com pandas e matplotlib:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[29]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
@@ -17147,34 +17147,34 @@ Abaixo está um exemplo sobre como traçar histogramas com pandas e matplotlib:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[31]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">reducer</span><span class="p">():</span>
-    <span class="n">entriesByUnit</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">entriesTotal</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">oldKey</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdin</span><span class="p">:</span>
         <span class="c1"># your code here</span>
         <span class="n">data_mapped</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)</span>
+        
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">data_mapped</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
             <span class="k">continue</span>
         
-        <span class="n">key</span><span class="p">,</span> <span class="n">entries</span> <span class="o">=</span> <span class="n">data_mapped</span>
+        <span class="n">thisKey</span><span class="p">,</span> <span class="n">entries</span> <span class="o">=</span> <span class="n">data_mapped</span>
         
-        <span class="k">if</span> <span class="n">oldKey</span> <span class="ow">and</span> <span class="n">oldKey</span> <span class="o">!=</span> <span class="n">key</span><span class="p">:</span>
-            <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;</span><span class="si">{0}</span><span class="se">\t</span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">oldKey</span><span class="p">,</span> <span class="n">entriesByUnit</span><span class="p">))</span>
-<span class="c1">#             print(f&#39;{oldKey}\t{entriesByUnit}&#39;)</span>
-            <span class="n">oldKey</span> <span class="o">=</span> <span class="n">key</span>
-            <span class="n">entriesByUnit</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{0}</span><span class="se">\t</span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">oldKey</span><span class="p">,</span> <span class="n">entriesTotal</span><span class="p">))</span>
+        
+        <span class="k">if</span> <span class="n">oldKey</span> <span class="ow">and</span> <span class="n">oldKey</span> <span class="o">!=</span> <span class="n">thisKey</span><span class="p">:</span>
+            <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;</span><span class="si">{0}</span><span class="se">\t</span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">oldKey</span><span class="p">,</span> <span class="n">entriesTotal</span><span class="p">))</span>
+            <span class="n">entriesTotal</span> <span class="o">=</span> <span class="mi">0</span>
         
         
-        <span class="n">oldKey</span> <span class="o">=</span> <span class="n">key</span>
-        <span class="n">entriesByUnit</span> <span class="o">+=</span> <span class="nb">float</span><span class="p">(</span><span class="n">entries</span><span class="p">)</span>
+        <span class="n">oldKey</span> <span class="o">=</span> <span class="n">thisKey</span>
+        <span class="n">entriesTotal</span> <span class="o">+=</span> <span class="nb">float</span><span class="p">(</span><span class="n">entries</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">oldKey</span> <span class="o">!=</span><span class="kc">None</span><span class="p">:</span>
-<span class="c1">#             print(f&#39;{oldkey}\t{entriesByUnit}&#39;)</span>
-            <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;</span><span class="si">{0}</span><span class="se">\t</span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">oldKey</span><span class="p">,</span> <span class="n">entriesByUnit</span><span class="p">))</span>    
+        <span class="k">if</span> <span class="n">thisKey</span> <span class="o">!=</span><span class="kc">None</span><span class="p">:</span>
+            <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;</span><span class="si">{0}</span><span class="se">\t</span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">oldKey</span><span class="p">,</span> <span class="n">entriesTotal</span><span class="p">))</span>    
                 
                 
 <span class="n">sys</span><span class="o">.</span><span class="n">stdin</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;mapper_result.txt&#39;</span><span class="p">)</span>
